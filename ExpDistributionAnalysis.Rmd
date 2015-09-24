@@ -1,0 +1,27 @@
+---
+title: "Analysis of Exponential Distribution"
+author: "Aleksey Linetskiy"
+date: "Thursday, September 24, 2015"
+output: html_document
+---
+
+Dist
+
+```{r}
+library(ggplot2)
+
+lambda <- 0.2
+rate <- 1/lambda
+hist(rexp(1000, lambda))
+```
+
+
+```{r}
+mns = NULL
+for (i in 1 : 1000) mns = c(mns, mean(rexp(40,lambda)))
+res<-as.data.frame(mns)
+p <- ggplot(res, aes(mns))
+p <- p + geom_histogram(binwidth=0.1)
+p <- p+ geom_vline(xintercept=1/lambda, colour='red', show_guide=TRUE)
+print(p)
+```
